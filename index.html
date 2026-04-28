@@ -2,18 +2,18 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>PMBA APP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projeto PMBA</title>
 
 <style>
-body {
+body{
   margin:0;
   font-family:Arial;
   background:#0f172a;
   color:white;
   text-align:center;
 }
-button {
+button{
   margin:10px;
   padding:15px;
   border:none;
@@ -21,6 +21,12 @@ button {
   background:#16a34a;
   color:white;
   font-weight:bold;
+}
+.card{
+  background:#1e293b;
+  margin:20px;
+  padding:20px;
+  border-radius:15px;
 }
 </style>
 
@@ -30,19 +36,86 @@ button {
 
 <h1>🔥 Projeto Assunção PMBA</h1>
 
+<div class="card">
 <p id="status">XP: 0 | Nível: 1</p>
+</div>
 
-<button onclick="xp+=10;update()">+10 Questões</button>
-<button onclick="xp+=50;update()">Fechar Dia</button>
+<button onclick="addXP(10)">+10 Questões</button>
+<button onclick="closeDay()">Fechar Dia</button>
+
+<div class="card">
+<h3>🧠 Questão do Dia</h3>
+<p id="question"></p>
+<button onclick="answer(true)">Resposta A</button>
+<button onclick="answer(false)">Resposta B</button>
+<p id="result"></p>
+</div>
+
+<div class="card">
+<h3>⏱️ Cronômetro</h3>
+<p id="timer">50:00</p>
+<button onclick="startTimer()">Iniciar</button>
+</div>
 
 <script>
 let xp=0;
+let timer=3000;
+let interval;
 
 function update(){
-  let level = Math.floor(xp/100)+1;
-  document.getElementById("status").innerText =
+  let level=Math.floor(xp/100)+1;
+  document.getElementById("status").innerText=
   "XP: "+xp+" | Nível: "+level;
 }
+
+function addXP(v){
+  xp+=v;
+  update();
+}
+
+function closeDay(){
+  xp+=50;
+  update();
+}
+
+function startTimer(){
+  clearInterval(interval);
+  interval=setInterval(()=>{
+    if(timer<=0){
+      clearInterval(interval);
+      alert("Tempo finalizado!");
+    }
+    timer--;
+    let m=Math.floor(timer/60);
+    let s=timer%60;
+    document.getElementById("timer").innerText=
+    m+":"+("0"+s).slice(-2);
+  },1000);
+}
+
+let questions=[
+"Segurança pública é dever de quem?",
+"Crime culposo ocorre quando?",
+"O que significa porcentagem?"
+];
+
+function newQuestion(){
+  let q=questions[Math.floor(Math.random()*questions.length)];
+  document.getElementById("question").innerText=q;
+}
+
+function answer(correct){
+  if(correct){
+    xp+=20;
+    document.getElementById("result").innerText="Acertou 🔥";
+  }else{
+    document.getElementById("result").innerText="Errou ❌";
+  }
+  update();
+}
+
+newQuestion();
+update();
 </script>
 
 </body>
