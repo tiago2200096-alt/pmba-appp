@@ -3,338 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Projeto Assunção PMBA</title>
   <meta name="theme-color" content="#07111f" />
-  <title>Projeto Assunção PMBA — Premium</title>
-  <link rel="manifest" href="manifest.json" />
   <style>
-    :root{
-      --bg:#040b14;
-      --bg2:#07111f;
-      --panel:#0b1526;
-      --panel2:#101c31;
-      --line:#263854;
-      --line2:#35506f;
-      --text:#f8fafc;
-      --muted:#94a3b8;
-      --green:#22c55e;
-      --green2:#16a34a;
-      --blue:#2563eb;
-      --red:#991b1b;
-      --gold:#eab308;
-      --purple:#7c3aed;
-      --shadow:0 15px 40px rgba(0,0,0,.32);
-    }
-    *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-    html,body{margin:0;padding:0;scroll-behavior:smooth}
-    body{
-      min-height:100vh;
-      color:var(--text);
-      font-family:Arial, Helvetica, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(34,197,94,.13), transparent 25%),
-        radial-gradient(circle at top right, rgba(37,99,235,.12), transparent 25%),
-        radial-gradient(circle at bottom, rgba(124,58,237,.10), transparent 25%),
-        linear-gradient(180deg, #020617 0%, #07111f 45%, #04110b 100%);
-    }
-    body:before{
-      content:"";
-      position:fixed;
-      inset:0;
-      pointer-events:none;
-      opacity:.055;
-      background-image:linear-gradient(45deg, #fff 25%, transparent 25%),linear-gradient(-45deg, #fff 25%, transparent 25%),linear-gradient(45deg, transparent 75%, #fff 75%),linear-gradient(-45deg, transparent 75%, #fff 75%);
-      background-size:22px 22px;
-      background-position:0 0,0 11px,11px -11px,-11px 0px;
-      z-index:0;
-    }
-    .app{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:16px 16px 95px}
-    .hero{
-      background:linear-gradient(135deg, rgba(6,14,26,.96), rgba(13,31,54,.94));
-      border:1px solid rgba(34,197,94,.22);
-      border-radius:28px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero:before{
-      content:"";
-      position:absolute;inset:-40%;
-      background:conic-gradient(from 180deg, transparent, rgba(34,197,94,.10), transparent, rgba(37,99,235,.10), transparent);
-      animation:spin 12s linear infinite;
-      opacity:.65;
-    }
-    .hero-content{position:relative;z-index:2}
-    @keyframes spin{to{transform:rotate(360deg)}}
-    .badge{display:inline-flex;gap:8px;align-items:center;padding:8px 12px;border-radius:999px;background:rgba(34,197,94,.13);border:1px solid rgba(34,197,94,.30);color:#bbf7d0;font-size:12px;font-weight:900;letter-spacing:.8px;text-transform:uppercase}
-    h1{font-size:37px;line-height:1.05;margin:12px 0 8px;letter-spacing:-.8px}
-    h2{font-size:22px;margin:0 0 6px}
-    h3{margin:0 0 8px}
-    .subtitle{color:#cbd5e1;line-height:1.5;margin:0;max-width:820px}
-    .hero-grid{display:grid;grid-template-columns:1fr auto;gap:16px;align-items:center}
-    .emblem{font-size:64px;filter:drop-shadow(0 12px 20px rgba(0,0,0,.45))}
-    .panel,.card,.modal-card{background:linear-gradient(180deg, rgba(12,23,40,.96), rgba(7,14,25,.98));border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow)}
-    .panel{padding:18px;margin-top:16px}
-    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:16px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:16px}
-    .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px}
-    .card{padding:16px;overflow:hidden;position:relative}
-    .card:after{content:"";position:absolute;right:-20px;top:-20px;width:80px;height:80px;background:rgba(34,197,94,.07);border-radius:50%}
-    .label{display:block;color:var(--muted);font-size:12px;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
-    .big{font-size:24px;font-weight:900;line-height:1.1}
-    .muted{color:var(--muted);line-height:1.5}
-    .green{color:var(--green)}.gold{color:var(--gold)}.blue{color:#93c5fd}.red{color:#f87171}
-    .row{display:flex;align-items:center;justify-content:space-between;gap:14px}
-    .actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
-    button{border:0;border-radius:14px;padding:12px 15px;color:white;font-weight:900;background:var(--blue);box-shadow:0 8px 20px rgba(0,0,0,.25);cursor:pointer;transition:.16s ease;touch-action:manipulation}
-    button:active{transform:scale(.98)}
-    button.success{background:var(--green2)}button.danger{background:var(--red)}button.dark{background:#0b1526;border:1px solid #334761}button.goldBtn{background:#97730a}button.purple{background:var(--purple)}
-    input,textarea,select{width:100%;background:#07111f;color:white;border:1px solid #334761;border-radius:14px;padding:12px;margin-top:9px;font-size:15px;outline:none}
-    input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.10)}
-    .progressOuter{height:17px;background:#1b2a41;border:1px solid #2d405f;border-radius:999px;overflow:hidden;margin-top:14px}
-    .progressInner{height:100%;width:0%;background:linear-gradient(90deg,var(--green),var(--gold));border-radius:999px;transition:.28s ease}
-    .tabs{position:fixed;left:10px;right:10px;bottom:10px;z-index:20;background:rgba(4,11,20,.94);backdrop-filter:blur(12px);border:1px solid rgba(148,163,184,.22);border-radius:22px;padding:8px;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;max-width:760px;margin:0 auto;box-shadow:0 20px 50px rgba(0,0,0,.45)}
-    .tab{padding:10px 6px;border-radius:16px;background:transparent;border:0;color:#a8b7cb;font-size:12px;box-shadow:none}
-    .tab.active{background:rgba(34,197,94,.16);color:#bbf7d0;border:1px solid rgba(34,197,94,.25)}
-    .page{display:none}.page.active{display:block;animation:fade .25s ease}
-    @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-    .subject{width:100%;display:grid;grid-template-columns:42px 1fr auto;gap:10px;align-items:center;text-align:left;padding:14px;border-radius:16px;background:#07111f;border:1px solid #2b405e;color:white;margin-top:10px;box-shadow:none}
-    .subject.done{background:rgba(20,83,45,.82);border-color:rgba(34,197,94,.55)}
-    .subject .icon{font-size:23px;text-align:center}.subject small{display:block;color:#a7b5c7;margin-top:4px}.subject .xp{color:#bbf7d0;font-weight:900}
-    .timer{font-size:48px;font-weight:900;color:var(--green);letter-spacing:1px;text-shadow:0 0 16px rgba(34,197,94,.20)}
-    .timerMode{color:#bbf7d0;font-weight:900;margin-top:10px}
-    .questionBox{margin-top:14px;padding:16px;border-radius:20px;background:#07111f;border:1px solid #2c405e}
-    .qSubject{color:#93c5fd;font-weight:900;margin-bottom:8px;text-transform:uppercase;font-size:13px;letter-spacing:.7px}
-    .options{display:grid;gap:10px;margin-top:14px}.option{text-align:left;background:#0a1628;border:1px solid #2b3a56;border-radius:14px;padding:13px;color:white;box-shadow:none}.feedback{margin-top:12px;font-weight:900;line-height:1.5}
-    .schedule{padding-left:18px;line-height:1.8;color:#e2e8f0}.rule{margin-top:10px;padding:12px;border-radius:14px;background:#07111f;border:1px solid #23324c;color:#dbe5f5}
-    .modal{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:50;display:none;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modal-card{width:100%;max-width:520px;padding:20px}
-    .avatarGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.avatar{font-size:28px;padding:12px;background:#07111f;border:1px solid #334761;border-radius:14px;text-align:center;cursor:pointer}.avatar.active{border-color:var(--green);background:rgba(34,197,94,.14)}
-    .profileLine{display:flex;gap:12px;align-items:center;margin-top:12px}.profileAvatar{font-size:46px;width:70px;height:70px;display:flex;align-items:center;justify-content:center;background:rgba(34,197,94,.12);border:1px solid rgba(34,197,94,.24);border-radius:22px}.profileName{font-size:24px;font-weight:900}.chip{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:#07111f;border:1px solid #30455f;color:#cbd5e1;font-size:12px;margin:4px 4px 0 0}
-    .shareCard{background:linear-gradient(135deg,#07111f,#0d2a1b);border:1px solid rgba(34,197,94,.35);border-radius:20px;padding:16px;margin-top:14px}.shareText{white-space:pre-wrap;color:#dffbea;line-height:1.55;font-weight:700}
-    .statBar{height:12px;background:#1b2a41;border-radius:999px;overflow:hidden;margin-top:8px}.statFill{height:100%;background:linear-gradient(90deg,var(--blue),var(--green));border-radius:999px}.hidden{display:none!important}
-    @media(max-width:960px){.grid-4{grid-template-columns:repeat(2,1fr)}.grid-3,.grid-2{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr}.emblem{font-size:52px}}
-    @media(max-width:560px){.app{padding:12px 12px 95px}h1{font-size:30px}.hero{padding:18px}.grid-4{grid-template-columns:1fr 1fr}.big{font-size:21px}.timer{font-size:38px}.row{flex-direction:column;align-items:flex-start}.tabs{grid-template-columns:repeat(5,1fr)}.tab{font-size:11px;padding:9px 4px}.avatarGrid{grid-template-columns:repeat(5,1fr)}}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:Arial,sans-serif;background:linear-gradient(180deg,#020617,#07111f,#052e16);color:#f8fafc}
+    .app{max-width:1050px;margin:0 auto;padding:16px 16px 90px}
+    .hero,.panel,.card{background:#0f172a;border:1px solid #334155;border-radius:22px;padding:18px;margin-top:14px;box-shadow:0 15px 35px rgba(0,0,0,.28)}
+    .hero{background:linear-gradient(135deg,#06111f,#10223b,#14532d)}
+    h1{font-size:34px;margin:8px 0} h2{margin:0 0 8px}.muted{color:#94a3b8;line-height:1.5}
+    .badge{display:inline-block;background:rgba(34,197,94,.15);color:#bbf7d0;border:1px solid rgba(34,197,94,.35);padding:8px 12px;border-radius:999px;font-weight:bold;font-size:12px}
+    .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:14px}.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+    .label{display:block;color:#94a3b8;font-size:12px;margin-bottom:6px}.big{font-size:24px;font-weight:900}.green{color:#22c55e}.red{color:#f87171}.gold{color:#eab308}
+    button{border:0;border-radius:14px;padding:12px 14px;color:white;font-weight:900;background:#2563eb;margin:5px;cursor:pointer}button.success{background:#16a34a}button.danger{background:#991b1b}button.dark{background:#111827;border:1px solid #334155}
+    input,textarea,select{width:100%;padding:12px;border-radius:14px;border:1px solid #334155;background:#020617;color:white;margin-top:8px;font-size:15px}
+    .progressOuter{width:100%;height:16px;border-radius:999px;background:#1e293b;margin-top:12px;overflow:hidden}.progressInner{height:100%;width:0%;border-radius:999px;background:linear-gradient(90deg,#22c55e,#eab308)}
+    .tabs{position:fixed;left:10px;right:10px;bottom:10px;max-width:760px;margin:0 auto;display:grid;grid-template-columns:repeat(5,1fr);gap:6px;background:rgba(2,6,23,.96);border:1px solid #334155;border-radius:22px;padding:8px;z-index:99}
+    .tab{background:transparent;color:#94a3b8;font-size:12px;padding:8px 4px;margin:0}.tab.active{background:rgba(34,197,94,.18);color:#bbf7d0;border:1px solid rgba(34,197,94,.28)}
+    .page{display:none}.page.active{display:block}.subject,.option{width:100%;display:block;text-align:left;background:#020617;border:1px solid #334155;margin-top:10px;border-radius:16px;padding:14px}.subject.done{background:#14532d;border-color:#22c55e}
+    .timer{font-size:44px;color:#22c55e;font-weight:900}.feedback{margin-top:12px;font-weight:900;line-height:1.5}
+    .modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:999;align-items:center;justify-content:center;padding:16px}.modal.show{display:flex}.modalCard{width:100%;max-width:500px;background:#0f172a;border:1px solid #334155;border-radius:22px;padding:18px}
+    .avatarGrid{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:10px}.avatar{background:#020617;border:1px solid #334155;border-radius:14px;padding:10px;text-align:center;font-size:24px}.avatar.active{border-color:#22c55e;background:#14532d}
+    .shareBox{white-space:pre-wrap;background:#052e16;border:1px solid #22c55e;border-radius:16px;padding:14px;margin-top:12px;color:#dcfce7;line-height:1.5}
+    @media(max-width:700px){h1{font-size:29px}.grid3{grid-template-columns:1fr}.timer{font-size:36px}}
   </style>
 </head>
 <body>
   <div class="app">
-    <section class="hero">
-      <div class="hero-content hero-grid">
-        <div>
-          <div class="badge">⚔️ V2 Premium • Operação Aprovação PMBA</div>
-          <h1>Projeto Assunção PMBA</h1>
-          <p class="subtitle">Painel gamer de estudos com cadastro, XP, patente, cronômetro, questões prováveis, estatísticas, sons e cartão para compartilhar com a tropa.</p>
-          <div class="actions">
-            <button id="installBtn" class="success hidden">📲 Instalar app</button>
-            <button class="dark" onclick="openSignup(true)">👤 Cadastro</button>
-            <button class="dark" onclick="playManualSound()">🔊 Som</button>
-          </div>
-        </div>
-        <div class="emblem">🛡️</div>
-      </div>
-    </section>
-
-    <section id="page-home" class="page active">
-      <section class="panel">
-        <div class="row">
-          <div class="profileLine">
-            <div class="profileAvatar" id="profileAvatar">🦅</div>
-            <div>
-              <div class="profileName" id="profileName">Candidato</div>
-              <div class="muted" id="profileMeta">Cadastre seu perfil para começar.</div>
-              <div id="profileChips"></div>
-            </div>
-          </div>
-          <button class="purple" onclick="openSignup(true)">Editar perfil</button>
-        </div>
-      </section>
-
-      <section class="grid-4">
-        <div class="card"><span class="label">Patente</span><div class="big" id="rank">Recruta</div></div>
-        <div class="card"><span class="label">Nível</span><div class="big" id="level">1</div></div>
-        <div class="card"><span class="label">Sequência</span><div class="big" id="streak">🔥 0 dias</div></div>
-        <div class="card"><span class="label">Questões</span><div class="big" id="questions">0</div></div>
-      </section>
-
-      <section class="panel">
-        <div class="row">
-          <div>
-            <h2>Barra de Evolução</h2>
-            <div class="muted" id="dailyStatus">Missão aberta. Comece pelo básico.</div>
-          </div>
-          <div class="big green" id="dailyPercent">0%</div>
-        </div>
-        <div class="progressOuter"><div class="progressInner" id="progressInner"></div></div>
-        <div class="muted" style="margin-top:10px" id="xpText">XP do nível: 0/250</div>
-        <div class="actions">
-          <button onclick="addQuestions(10)">+10 questões</button>
-          <button onclick="addQuestions(30)">+30 questões</button>
-          <button class="success" onclick="closeDay()">Fechar dia ✅</button>
-          <button class="danger" onclick="resetAll()">Resetar</button>
-        </div>
-      </section>
-
-      <section class="grid-2">
-        <div class="panel">
-          <div class="row">
-            <div>
-              <h2 id="timerTitle">🎯 Cronômetro Inteligente</h2>
-              <p class="muted">50min foco → 10min pausa. A cada 3 ciclos, pausa longa.</p>
-            </div>
-            <div class="timer" id="timer">50:00</div>
-          </div>
-          <div class="timerMode" id="timerMode">Foco total • 0 ciclos concluídos</div>
-          <div class="actions">
-            <button class="success" onclick="toggleTimer()" id="timerButton">Iniciar</button>
-            <button onclick="setTimer('foco')">Foco 50</button>
-            <button onclick="setTimer('pausaCurta')">Pausa 10</button>
-            <button onclick="setTimer('pausaLonga')">Pausa 20</button>
-          </div>
-        </div>
-
-        <div class="panel">
-          <h2>🎯 Missão de Hoje</h2>
-          <p class="muted" id="todayMissionText">Complete 70% do checklist, faça questões e revise erros.</p>
-          <div class="actions">
-            <button class="goldBtn" onclick="dailyBoost()">Ativar boost diário</button>
-            <button class="dark" onclick="showPage('study')">Ver missões</button>
-          </div>
-        </div>
-      </section>
-    </section>
-
-    <section id="page-questions" class="page">
-      <section class="panel">
-        <h2>🧠 Questões Prováveis da PMBA</h2>
-        <p class="muted">Treino por assuntos prováveis. Não é previsão da prova: é preparação estratégica.</p>
-        <div class="actions">
-          <select id="questionFilter" onchange="newQuestion()">
-            <option value="todas">Todas as matérias</option>
-            <option value="Português">Português</option>
-            <option value="Matemática/RLM">Matemática/RLM</option>
-            <option value="Direito Constitucional">Direito Constitucional</option>
-            <option value="Direito Penal">Direito Penal</option>
-            <option value="Direitos Humanos">Direitos Humanos</option>
-            <option value="História/Geo BA">História/Geo BA</option>
-            <option value="Atualidades">Atualidades</option>
-          </select>
-        </div>
-        <div class="questionBox">
-          <div class="qSubject" id="questionSubject">Matéria</div>
-          <div id="questionText"></div>
-          <div class="options" id="questionOptions"></div>
-          <div class="feedback" id="questionFeedback"></div>
-        </div>
-        <div class="actions">
-          <button onclick="newQuestion()">Nova questão</button>
-          <button class="goldBtn" onclick="quickQuiz()">Simulado rápido</button>
-          <button class="dark" onclick="markErrorReview()">Marcar para revisar</button>
-        </div>
-      </section>
-    </section>
-
-    <section id="page-study" class="page">
-      <section class="panel">
-        <h2>📚 Missões de Estudo</h2>
-        <p class="muted">Clique quando concluir uma missão. Cada missão soma XP.</p>
-        <div id="subjects"></div>
-      </section>
-
-      <section class="panel">
-        <h2>📅 Escala da Semana</h2>
-        <p class="muted">Ajuste conforme sua escala 6x1.</p>
-        <select id="weekMode" onchange="renderSchedule()">
-          <option value="tarde">Semana da tarde — trabalho 13h às 21h</option>
-          <option value="manha">Semana da manhã — trabalho 05h às 13h</option>
-        </select>
-        <ul class="schedule" id="schedule"></ul>
-        <div class="rule"><b>Meta semanal:</b> 350 questões, 5 treinos de academia/TAF e 1 simulado no domingo livre.</div>
-      </section>
-    </section>
-
-    <section id="page-stats" class="page">
-      <section class="grid-3">
-        <div class="card"><span class="label">Acertos</span><div class="big green" id="correctCount">0</div></div>
-        <div class="card"><span class="label">Erros</span><div class="big red" id="wrongCount">0</div></div>
-        <div class="card"><span class="label">Aproveitamento</span><div class="big gold" id="accuracy">0%</div></div>
-      </section>
-
-      <section class="panel">
-        <h2>📊 Estatísticas por Matéria</h2>
-        <div id="subjectStats"></div>
-      </section>
-
-      <section class="panel">
-        <h2>🏆 Regras do Guerreiro</h2>
-        <div class="rule">✔️ 70% do plano feito = dia vencido</div>
-        <div class="rule">✔️ Questões todo dia, nem que sejam poucas</div>
-        <div class="rule">✔️ Errou? Vai para revisão</div>
-        <div class="rule">✔️ Academia conta como preparação para o TAF</div>
-        <div class="rule">✔️ Domingo livre = simulado + correção</div>
-      </section>
-    </section>
-
-    <section id="page-profile" class="page">
-      <section class="panel">
-        <h2>👥 Cadastro e Compartilhamento</h2>
-        <p class="muted">Esse cadastro é local: fica salvo no celular de cada pessoa. Para ranking online entre amigos, a próxima etapa é conectar Firebase/Supabase.</p>
-        <div class="actions">
-          <button class="success" onclick="openSignup(true)">Editar cadastro</button>
-          <button onclick="copyShareCard()">Copiar cartão</button>
-          <button class="dark" onclick="exportProgress()">Exportar progresso</button>
-        </div>
-        <div class="shareCard">
-          <div class="shareText" id="shareText"></div>
-        </div>
-      </section>
-
-      <section class="panel">
-        <h2>📝 Frase de Guerra</h2>
-        <textarea id="note" rows="4"></textarea>
-      </section>
-    </section>
-  </div>
-
-  <nav class="tabs">
-    <button class="tab active" data-page="home" onclick="showPage('home')">🏠<br>Início</button>
-    <button class="tab" data-page="questions" onclick="showPage('questions')">🧠<br>Questões</button>
-    <button class="tab" data-page="study" onclick="showPage('study')">📚<br>Estudo</button>
-    <button class="tab" data-page="stats" onclick="showPage('stats')">📊<br>Status</button>
-    <button class="tab" data-page="profile" onclick="showPage('profile')">👤<br>Perfil</button>
-  </nav>
-
-  <div class="modal" id="signupModal">
-    <div class="modal-card">
-      <h2>👤 Cadastro do Guerreiro</h2>
-      <p class="muted">Crie seu perfil para acompanhar evolução e compartilhar com amigos.</p>
-      <input id="signupName" placeholder="Seu nome ou apelido" />
-      <input id="signupCity" placeholder="Cidade / BA" />
-      <input id="signupGoal" placeholder="Meta. Ex: PMBA 2026" />
-      <select id="signupShift">
-        <option value="tarde">Semana atual: tarde</option>
-        <option value="manha">Semana atual: manhã</option>
-      </select>
-      <div class="muted" style="margin-top:12px">Escolha seu avatar:</div>
-      <div class="avatarGrid" id="avatarGrid"></div>
-      <div class="actions">
-        <button class="success" onclick="saveSignup()">Salvar cadastro</button>
-        <button class="dark" onclick="closeSignup()">Agora não</button>
-      </div>
+    <div class="hero">
+      <div class="badge">⚔️ V3 Premium Estável</div>
+      <h1>🔥 Projeto Assunção PMBA</h1>
+      <p class="muted">Painel gamer de estudos com cadastro, XP, patente, cronômetro, questões, estatísticas e progresso.</p>
+      <button class="success" id="openCadastroBtn">👤 Cadastro</button>
+      <button class="dark" id="somBtn">🔊 Testar som</button>
     </div>
+
+    <section id="pageInicio" class="page active">
+      <div class="panel"><h2>👤 Perfil</h2><div class="big" id="perfilNome">Candidato</div><p class="muted" id="perfilMeta">PMBA 2026</p></div>
+      <div class="grid">
+        <div class="card"><span class="label">Patente</span><div class="big" id="patente">Recruta</div></div>
+        <div class="card"><span class="label">Nível</span><div class="big" id="nivel">1</div></div>
+        <div class="card"><span class="label">Streak</span><div class="big" id="streak">🔥 0</div></div>
+        <div class="card"><span class="label">Questões</span><div class="big" id="questoes">0</div></div>
+      </div>
+      <div class="panel">
+        <h2>📊 Evolução</h2><div class="big green" id="porcentagem">0%</div>
+        <div class="progressOuter"><div class="progressInner" id="barra"></div></div><p class="muted" id="xpTexto">XP: 0/250</p>
+        <button id="mais10Btn">+10 questões</button><button id="mais30Btn">+30 questões</button><button class="success" id="fecharDiaBtn">Fechar dia ✅</button><button class="danger" id="resetBtn">Resetar</button>
+      </div>
+      <div class="panel">
+        <h2>⏱️ Cronômetro Inteligente</h2><div class="timer" id="timer">50:00</div><p class="green" id="timerInfo">Foco total • 0 ciclos</p>
+        <button class="success" id="timerStartBtn">Iniciar</button><button id="timerFocoBtn">Foco 50</button><button id="timerPausaBtn">Pausa 10</button><button id="timerLongaBtn">Pausa 20</button>
+      </div>
+    </section>
+
+    <section id="pageQuestoes" class="page">
+      <div class="panel"><h2>🧠 Questões Prováveis</h2>
+        <select id="filtroMateria"><option value="todas">Todas</option><option value="Português">Português</option><option value="Matemática/RLM">Matemática/RLM</option><option value="Direito Constitucional">Direito Constitucional</option><option value="Direito Penal">Direito Penal</option></select>
+        <div class="card"><strong class="green" id="questaoMateria">Matéria</strong><p id="questaoTexto"></p><div id="opcoes"></div><div class="feedback" id="feedback"></div></div>
+        <button id="novaQuestaoBtn">Nova questão</button>
+      </div>
+    </section>
+
+    <section id="pageEstudo" class="page">
+      <div class="panel"><h2>📚 Missões de Estudo</h2><div id="missoes"></div></div>
+      <div class="panel"><h2>📅 Escala</h2><select id="escalaSelect"><option value="tarde">Semana tarde</option><option value="manha">Semana manhã</option></select><ul id="escalaLista"></ul></div>
+    </section>
+
+    <section id="pageStatus" class="page">
+      <div class="grid3"><div class="card"><span class="label">Acertos</span><div class="big green" id="acertos">0</div></div><div class="card"><span class="label">Erros</span><div class="big red" id="erros">0</div></div><div class="card"><span class="label">Aproveitamento</span><div class="big gold" id="aproveitamento">0%</div></div></div>
+    </section>
+
+    <section id="pagePerfil" class="page">
+      <div class="panel"><h2>👥 Compartilhar progresso</h2><button class="success" id="editarPerfilBtn">Editar cadastro</button><button id="copiarCardBtn">Copiar cartão</button><div class="shareBox" id="shareBox"></div></div>
+      <div class="panel"><h2>📝 Frase de guerra</h2><textarea id="frase" rows="4"></textarea></div>
+    </section>
   </div>
 
-  <script>
-    const avatars = ['🦅','🛡️','🚔','⚔️','🔥','🐆','🎯','🏋️','📚','👮'];
-    const subjects = [
-      { id:'portugues', name:'Português', icon:'📖', xp:35, mission:'Interpretação + gramática' },
-      { id:'matematica', name:'Matemática / RLM', icon:'🧮', xp:35, mission:'Porcentagem, regra de 3 e lógica' },
-      { id:'constitucional', name:'Direito Constitucional', icon:'⚖️', xp:30, mission:'Art. 5º e segurança pública' },
-      { id:'penal', name:'Direito Penal', icon:'🚔', xp:30, mission:'Crime, pena e legítima defesa' },
-      { id:'dh', name:'Direitos Humanos', icon:'🛡️', xp:25, mission:'Princípios e cidadania' },
-      { id:'bahia', name:'História/Geo BA', icon:'🌎', xp:25, mission:'Bahia, território e história' },
-      { id:'atualidades', name:'Atualidades', icon:'📰', xp:20, mission:'Brasil, Bahia e segurança' },
-      { id:'redacao', name:'Redação', icon:'✍️', xp:40, mission:'Estrutura, repertório e treino' },
-      { id:'taf', name:'Academia / TAF', icon:'🏋️', xp:30, mission:'Força, corrida e disciplina' }
-    ];
-    const questionBank = [
-      {subject:'Português',question:'Em “O candidato estudou bastante, portanto foi aprovado”, a palavra “portanto” indica ideia de:',options:['causa','conclusão','oposição','adição'],answer:1,
+  <div class="tabs"><button class="tab active" data-page="Inicio">🏠<br>Início</button><button class="tab" data-page="Questoes">🧠<br>Questões</button><button class="tab" data-page="Estudo">📚<br>Estudo</button><button class="tab" data-page="Status">📊<br>Status</button><button class="tab" data-page="Perfil">👤<br>Perfil</button></div>
+
+  <div class="modal" id="cadastroModal"><div class="modalCard"><h2>👤 Cadastro</h2><input id="nomeInput" placeholder="Nome ou apelido" /><input id="cidadeInput" placeholder="Cidade / BA" /><input id="metaInput" placeholder="Meta. Ex: PMBA 2026" /><div class="avatarGrid" id="avatarGrid"></div><button class="success" id="salvarCadastroBtn">Salvar</button><button class="dark" id="fecharCadastroBtn">Fechar</button></div></div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+  const avatars = ["🦅","🛡️","🚔","⚔️","🔥","🐆","🎯","🏋️","📚","👮"];
+  const materias = [{id:"portugues",nome:"Português",xp:35,texto:"Interpretação + gramática"},{id:"matematica",nome:"Matemática/RLM",xp:35,texto:"Porcentagem, regra de 3 e lógica"},{id:"constitucional",nome:"Direito Constitucional",xp:30,texto:"Art. 5º e segurança pública"},{id:"penal",nome:"Direito Penal",xp:30,texto:"Crime, pena e legítima defesa"},{id:"dh",nome:"Direitos Humanos",xp:25,texto:"Princípios e cidadania"},{id:"bahia",nome:"História/Geo BA",xp:25,texto:"Bahia, território e história"},{id:"atualidades",nome:"Atualidades",xp:20,texto:"Brasil, Bahia e segurança"},{id:"redacao",nome:"Redação",xp:40,texto:"Estrutura e treino"},{id:"taf",nome:"Academia/TAF",xp:30,texto:"Força, corrida e disciplina"}];
+  const questoes = [{materia:"Português",q:"Em 'O candidato estudou bastante, portanto foi aprovado', a palavra 'portanto' indica:",op:["causa","conclusão","oposição","adição"],r:1,exp:"Portanto é conectivo conclusivo."},{materia:"Português",q:"Assinale a alternativa com erro de concordância:",op:["Faz dois anos que estudo.","Havia muitos candidatos.","Existem muitas vagas.","Houveram muitos problemas."],r:3,exp:"Haver no sentido de existir fica no singular: houve muitos problemas."},{materia:"Matemática/RLM",q:"Um produto de R$ 200 teve desconto de 15%. Qual o valor final?",op:["R$ 150","R$ 160","R$ 170","R$ 185"],r:2,exp:"15% de 200 = 30. Então 200 - 30 = 170."},{materia:"Direito Constitucional",q:"Segundo a Constituição, a segurança pública é:",op:["dever apenas da PM","dever do Estado e responsabilidade de todos","exclusiva da União","atividade privada"],r:1,exp:"Art. 144: dever do Estado, direito e responsabilidade de todos."},{materia:"Direito Penal",q:"Crime culposo ocorre quando o agente:",op:["quer o resultado","assume o risco","age com imprudência, negligência ou imperícia","age sempre com violência"],r:2,exp:"Culpa envolve imprudência, negligência ou imperícia."}];
+  const escalas = {tarde:["07:20 — Acordar, água e café","08:00 — Português + questões","09:30 — Matemática/RLM","10:40 — Direito","11:45 — Academia / TAF","13:00 às 21:00 — Trabalho","22:00 — Revisar erros"],manha:["05:00 às 13:00 — Trabalho","14:30 — Descanso + alimentação","15:00 — Português ou Matemática","16:20 — Direito","17:30 — Questões","18:30 — Academia / TAF"]};
+  let estado = JSON.parse(localStorage.getItem("pmba_v3")) || {nome:"",cidade:"",meta:"PMBA 2026",avatar:"🦅",xp:0,questoes:0,acertos:0,erros:0,streak:0,done:{},frase:"Só paro quando estiver com uma arma na cintura e andando de viatura. E mesmo assim, ainda continuarei estudando.",timerModo:"foco",timer:3000,rodando:false,ciclos:0,escala:"tarde"};
+  let questaoAtual = 0, intervalo = null, avatarSelecionado = estado.avatar;
+  function salvar(){ localStorage.setItem("pmba_v3", JSON.stringify(estado)); }
+  function som(tipo){ try{ const C=window.AudioContext||window.webkitAudioContext; const ctx=new C(); const osc=ctx.createOscillator(); const gain=ctx.createGain(); osc.connect(gain); gain.connect(ctx.destination); osc.frequency.value=tipo==="erro"?180:tipo==="ok"?650:430; osc.type=tipo==="erro"?"sawtooth":"sine"; gain.gain.setValueAtTime(0.0001,ctx.currentTime); gain.gain.exponentialRampToValueAtTime(0.06,ctx.currentTime+0.01); gain.gain.exponentialRampToValueAtTime(0.0001,ctx.currentTime+0.15); osc.start(); osc.stop(ctx.currentTime+0.15);}catch(e){} }
+  function nivel(){ return Math.floor(estado.xp/250)+1; }
+  function patente(){ const n=nivel(); if(n<=2)return"Recruta"; if(n<=4)return"Aluno em Formação"; if(n<=6)return"Candidato Blindado"; if(n<=9)return"Soldado da Aprovação"; if(n<=13)return"Cabo da Disciplina"; return"Futuro PMBA"; }
+  function aproveitamento(){ const total=estado.acertos+estado.erros; return total?Math.round((estado.acertos/total)*100):0; }
+  function render(){ const concluidas=Object.keys(estado.done).length; const porcentagem=Math.round((concluidas/materias.length)*100); const progresso=estado.xp%250; document.getElementById("perfilNome").innerText=(estado.avatar||"🦅")+" "+(estado.nome||"Candidato"); document.getElementById("perfilMeta").innerText=(estado.cidade||"Bahia")+" • "+(estado.meta||"PMBA 2026"); document.getElementById("patente").innerText=patente(); document.getElementById("nivel").innerText=nivel(); document.getElementById("streak").innerText="🔥 "+estado.streak+" dias"; document.getElementById("questoes").innerText=estado.questoes; document.getElementById("porcentagem").innerText=porcentagem+"%"; document.getElementById("barra").style.width=(progresso/250*100)+"%"; document.getElementById("xpTexto").innerText="XP: "+progresso+"/250"; document.getElementById("acertos").innerText=estado.acertos; document.getElementById("erros").innerText=estado.erros; document.getElementById("aproveitamento").innerText=aproveitamento()+"%"; document.getElementById("frase").value=estado.frase; document.getElementById("shareBox").innerText=(estado.avatar||"🦅")+" Projeto Assunção PMBA\nNome: "+(estado.nome||"Candidato")+"\nMeta: "+estado.meta+"\nPatente: "+patente()+"\nNível: "+nivel()+"\nXP: "+estado.xp+"\nQuestões: "+estado.questoes+"\nAcertos: "+estado.acertos+"\nAproveitamento: "+aproveitamento()+"%\nStreak: "+estado.streak+" dias"; renderMissoes(); renderEscala(); renderTimer(); salvar(); }
+  function renderMissoes(){ const box=document.getElementById("missoes"); box.innerHTML=""; materias.forEach(m=>{ const btn=document.createElement("button"); btn.className="subject "+(estado.done[m.id]?"done":""); btn.innerHTML="<b>"+(estado.done[m.id]?"✅ ":"⬜ ")+m.nome+"</b><br><span class='muted'>"+m.texto+"</span><br><span class='green'>+"+m.xp+" XP</span>"; btn.addEventListener("click",function(){ if(estado.done[m.id])return; estado.done[m.id]=true; estado.xp+=m.xp; som("ok"); render(); }); box.appendChild(btn); }); }
+  function renderEscala(){ const select=document.getElementById("escalaSelect"); select.value=estado.escala; const lista=document.getElementById("escalaLista"); lista.innerHTML=""; escalas[estado.escala].forEach(item=>{ const li=document.createElement("li"); li.innerText=item; lista.appendChild(li); }); }
+  function renderQuestao(){ const q=questoes[questaoAtual]; document.getElementById("questaoMateria").innerText=q.materia; document.getElementById("questaoTexto").innerText=q.q; document.getElementById("feedback").innerText=""; const opcoes=document.getElementById("opcoes"); opcoes.innerHTML=""; q.op.forEach((texto,i)=>{ const btn=document.createElement("button"); btn.className="option"; btn.innerText=String.fromCharCode(65+i)+") "+texto; btn.addEventListener("click",function(){ estado.questoes+=1; if(i===q.r){ estado.acertos+=1; estado.xp+=20; document.getElementById("feedback").className="feedback green"; document.getElementById("feedback").innerText="✅ Correto! +20 XP — "+q.exp; som("ok"); } else { estado.erros+=1; estado.xp+=3; document.getElementById("feedback").className="feedback red"; document.getElementById("feedback").innerText="❌ Errou. Resposta correta: "+String.fromCharCode(65+q.r)+". "+q.exp; som("erro"); } salvar(); render(); }); opcoes.appendChild(btn); }); }
+  function novaQuestao(){ const filtro=document.getElementById("filtroMateria").value; let lista=filtro==="todas"?questoes:questoes.filter(q=>q.materia===filtro); if(lista.length===0)lista=questoes; const escolhida=lista[Math.floor(Math.random()*lista.length)]; questaoAtual=questoes.indexOf(escolhida); renderQuestao(); som("click"); }
+  function formatarTempo(t){ const m=Math.floor(t/60); const s=t%60; return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0"); }
+  function renderTimer(){ document.getElementById("timer").innerText=formatarTempo(estado.timer); const nome=estado.timerModo==="foco"?"Foco total":estado.timerModo==="pausa"?"Pausa curta":"Pausa longa"; document.getElementById("timerInfo").innerText=nome+" • "+estado.ciclos+" ciclos"; document.getElementById("timerStartBtn").innerText=estado.rodando?"Pausar":"Iniciar"; }
+  function iniciarTimer(){ pararTimer(); intervalo=setInterval(function(){ if(estado.timer<=1){ pararTimer(); estado.rodando=false; if(estado.timerModo==="foco"){ estado.ciclos+=1; estado.xp+=25; alert("Ciclo concluído! +25 XP"); estado.timerModo=estado.ciclos%3===0?"longa":"pausa"; estado.timer=estado.timerModo==="longa"?1200:600; som("ok"); } else { estado.timerModo="foco"; estado.timer=3000; som("click"); } } else { estado.timer-=1; } render(); },1000); }
+  function pararTimer(){ if(intervalo)clearInterval(intervalo); intervalo=null; }
+  function abrirCadastro(){ document.getElementById("nomeInput").value=estado.nome||""; document.getElementById("cidadeInput").value=estado.cidade||""; document.getElementById("metaInput").value=estado.meta||"PMBA 2026"; avatarSelecionado=estado.avatar||"🦅"; renderAvatares(); document.getElementById("cadastroModal").classList.add("show"); }
+  function renderAvatares(){ const box=document.getElementById("avatarGrid"); box.innerHTML=""; avatars.forEach(a=>{ const div=document.createElement("div"); div.className="avatar "+(a===avatarSelecionado?"active":""); div.innerText=a; div.addEventListener("click",function(){ avatarSelecionado=a; renderAvatares(); }); box.appendChild(div); }); }
+  function mostrarPagina(nome){ document.querySelectorAll(".page").forEach(p=>p.classList.remove("active")); document.getElementById("page"+nome).classList.add("active"); document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.page===nome)); som("click"); }
+  document.getElementById("openCadastroBtn").addEventListener("click",abrirCadastro); document.getElementById("editarPerfilBtn").addEventListener("click",abrirCadastro); document.getElementById("fecharCadastroBtn").addEventListener("click",function(){document.getElementById("cadastroModal").classList.remove("show");}); document.getElementById("salvarCadastroBtn").addEventListener("click",function(){ estado.nome=document.getElementById("nomeInput").value||"Candidato"; estado.cidade=document.getElementById("cidadeInput").value||"Bahia"; estado.meta=document.getElementById("metaInput").value||"PMBA 2026"; estado.avatar=avatarSelecionado; document.getElementById("cadastroModal").classList.remove("show"); som("ok"); render(); });
+  document.getElementById("somBtn").addEventListener("click",function(){som("click");}); document.getElementById("mais10Btn").addEventListener("click",function(){estado.questoes+=10;estado.xp+=10;som("click");render();}); document.getElementById("mais30Btn").addEventListener("click",function(){estado.questoes+=30;estado.xp+=30;som("click");render();}); document.getElementById("fecharDiaBtn").addEventListener("click",function(){estado.streak+=1;estado.xp+=50;estado.questoes=0;estado.done={};som("ok");render();}); document.getElementById("resetBtn").addEventListener("click",function(){if(!confirm("Resetar todo o progresso?"))return;localStorage.removeItem("pmba_v3");location.reload();});
+  document.getElementById("timerStartBtn").addEventListener("click",function(){estado.rodando=!estado.rodando;if(estado.rodando){iniciarTimer();}else{pararTimer();}render();}); document.getElementById("timerFocoBtn").addEventListener("click",function(){estado.timerModo="foco";estado.timer=3000;estado.rodando=false;pararTimer();render();}); document.getElementById("timerPausaBtn").addEventListener("click",function(){estado.timerModo="pausa";estado.timer=600;estado.rodando=false;pararTimer();render();}); document.getElementById("timerLongaBtn").addEventListener("click",function(){estado.timerModo="longa";estado.timer=1200;estado.rodando=false;pararTimer();render();});
+  document.getElementById("novaQuestaoBtn").addEventListener("click",novaQuestao); document.getElementById("filtroMateria").addEventListener("change",novaQuestao); document.getElementById("escalaSelect").addEventListener("change",function(){estado.escala=this.value;render();})
